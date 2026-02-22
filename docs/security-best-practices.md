@@ -24,22 +24,25 @@ ssh-keygen -t ed25519 -C "your_email@example.com"
 
 | Algorithm | Recommendation | Reason |
 |-----------|----------------|--------|
-| **Ed25519** | ✅ Recommended | Fastest, most secure, smallest key size |
-| RSA 4096 | ✅ Acceptable | Good fallback for legacy systems |
-| RSA 2048 | ⚠️ Minimum | Acceptable but prefer 4096 |
-| DSA | ❌ Avoid | Deprecated by GitHub (March 2022) |
-| ECDSA | ⚠️ Avoid | Potential implementation vulnerabilities |
+| **Ed25519** | Recommended | Fastest, most secure, smallest key size |
+| RSA 4096 | Acceptable | Good fallback for legacy systems |
+| RSA 2048 | Minimum | Acceptable but prefer 4096 |
+| DSA | Avoid | Deprecated by GitHub (March 2022) |
+| ECDSA (nistp256/384/521) | Acceptable | Supported, but Ed25519 is usually preferred |
 
 ### Avoid Weak Keys
 
 ```bash
-# ❌ Bad: Default RSA (may be too small)
+# Bad: Default RSA (may be too small)
 ssh-keygen
 
-# ✅ Good: Ed25519
+# Good: Ed25519
 ssh-keygen -t ed25519 -C "identifier"
 
-# ✅ Good: RSA with 4096 bits (if Ed25519 not supported)
+# Good: Ed25519 with stronger passphrase KDF settings
+ssh-keygen -t ed25519 -a 100 -C "identifier"
+
+# Good: RSA with 4096 bits (if Ed25519 not supported)
 ssh-keygen -t rsa -b 4096 -C "identifier"
 ```
 
@@ -69,7 +72,7 @@ ssh-keygen -t ed25519 -C "your_email@example.com"
 **Example strong passphrases:**
 
 ```
-correct-horse-battery-staple-2024
+correct-horse-battery-staple-github
 My$ecureGitHub_Key!ForWork
 ```
 
@@ -91,8 +94,8 @@ ssh-add ~/.ssh/id_ed25519
 
 | File | Share? | Purpose |
 |------|--------|---------|
-| `id_ed25519` | ❌ NEVER | Your private key (secret) |
-| `id_ed25519.pub` | ✅ Yes | Your public key (can be shared) |
+| `id_ed25519` | NEVER | Your private key (secret) |
+| `id_ed25519.pub` | Yes | Your public key (can be shared) |
 
 ### Secure File Permissions
 
@@ -106,14 +109,14 @@ chmod 600 ~/.ssh/config
 
 ### Don't Store Keys in Unsafe Locations
 
-❌ **Avoid:**
+**Avoid:**
 - Cloud storage (Dropbox, Google Drive, OneDrive)
 - Email
 - Messaging apps
 - Version control (Git repositories)
 - Shared network drives
 
-✅ **Safe locations:**
+**Safe locations:**
 - Local `~/.ssh` directory with proper permissions
 - Encrypted backup drives
 - Hardware security keys (YubiKey)
@@ -151,7 +154,7 @@ Benefits:
 1. **Generate new key:**
 
    ```bash
-   ssh-keygen -t ed25519 -C "your_email@example.com-2024"
+   ssh-keygen -t ed25519 -C "your_email@example.com-rotated-YYYYMM"
    ```
 
 2. **Add new key to GitHub:**

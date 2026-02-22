@@ -25,7 +25,7 @@ ssh -vT git@github.com
 ssh-add -l
 
 # Check SSH config syntax
-ssh -G git@github.com
+ssh -G github.com
 
 # Display your public key
 cat ~/.ssh/id_ed25519.pub
@@ -212,13 +212,8 @@ ssh-keygen -R github.com
 ssh -T git@github.com
 ```
 
-When prompted, verify the fingerprint matches [GitHub's published fingerprints](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/githubs-ssh-key-fingerprints):
-
-```
-SHA256:+DiY3wvvV6TuJJhbpZisF/zLDA0zPMSvHdkr4UvCOqU (ED25519)
-SHA256:nThbg6kXUpJWGl7E1IGOCspRomTxdCARLviKw6E5SY8 (RSA)
-SHA256:p2QAMXNIC1TJYWeIOttrVc98/R1BUFWu3/LiyKgUfQM (ECDSA)
-```
+When prompted, verify the fingerprint matches [GitHub's published fingerprints](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/githubs-ssh-key-fingerprints).
+Only continue if it is an exact match.
 
 ---
 

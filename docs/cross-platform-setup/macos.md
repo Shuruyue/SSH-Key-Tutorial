@@ -55,7 +55,7 @@ macOS can automatically load keys and store passphrases in Keychain. Create or e
 ### Check if config exists
 
 ```bash
-cat ~/.ssh/config
+ls -la ~/.ssh/config
 ```
 
 ### Create or edit the config

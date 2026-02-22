@@ -36,7 +36,7 @@ When you connect to GitHub, your private key creates a signature that only your 
 │  Sign with      │    3. Signature      │  Verify with    │
 │  Private Key    │ ─────────────────►   │  Public Key     │
 │                 │                      │                 │
-│                 │    4. Access ✓       │                 │
+│                 │    4. Access OK      │                 │
 │                 │ ◄─────────────────   │                 │
 └─────────────────┘                      └─────────────────┘
 ```

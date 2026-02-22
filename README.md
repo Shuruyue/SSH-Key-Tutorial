@@ -42,15 +42,34 @@ ssh-keygen -t ed25519 -C "your_email@example.com"
 
 Start the SSH agent and add your key:
 
+Linux/macOS:
+
 ```bash
 eval "$(ssh-agent -s)"
 ssh-add ~/.ssh/id_ed25519
 ```
 
+Windows PowerShell:
+
+```powershell
+# Run once in Administrator PowerShell
+Get-Service ssh-agent | Set-Service -StartupType Automatic
+Start-Service ssh-agent
+ssh-add $env:USERPROFILE\.ssh\id_ed25519
+```
+
 Copy your public key:
+
+Linux/macOS:
 
 ```bash
 cat ~/.ssh/id_ed25519.pub
+```
+
+Windows PowerShell:
+
+```powershell
+Get-Content $env:USERPROFILE\.ssh\id_ed25519.pub | Set-Clipboard
 ```
 
 Add the key to [GitHub SSH Settings](https://github.com/settings/keys), then test the connection:

@@ -25,8 +25,9 @@ The `~/.ssh/config` file allows you to customize SSH connections with aliases, d
 ### Create the Config File
 
 ```bash
-# Check if file exists
-cat ~/.ssh/config
+# Ensure ~/.ssh exists with secure permissions
+mkdir -p ~/.ssh
+chmod 700 ~/.ssh
 
 # Create if it doesn't exist
 touch ~/.ssh/config
